@@ -18,13 +18,13 @@ require (
 	go.uber.org/mock v0.4.0
 	google.golang.org/grpc v1.75.1
 	google.golang.org/protobuf v1.36.9
-	k8s.io/api v0.31.13
-	k8s.io/apimachinery v0.31.13
+	k8s.io/api v0.32.10
+	k8s.io/apimachinery v0.32.10
 	k8s.io/client-go v1.5.2
 	k8s.io/klog/v2 v2.130.1
-	k8s.io/kubernetes v1.31.13
-	k8s.io/mount-utils v0.31.6
-	k8s.io/utils v0.0.0-20240921022957-49e7df575cb6
+	k8s.io/kubernetes v1.32.10
+	k8s.io/mount-utils v0.32.10
+	k8s.io/utils v0.0.0-20241104100929-3ea5e8cea738
 	sigs.k8s.io/cloud-provider-azure v1.31.1
 	sigs.k8s.io/cloud-provider-azure/pkg/azclient/configloader v0.1.5
 	sigs.k8s.io/yaml v1.4.0
@@ -71,7 +71,6 @@ require (
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.2 // indirect
 	github.com/golang-jwt/jwt/v5 v5.2.2 // indirect
-	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/gnostic-models v0.6.8 // indirect
@@ -79,6 +78,7 @@ require (
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/pprof v0.0.0-20241029153458-d1b30febd7db // indirect
 	github.com/google/uuid v1.6.0 // indirect
+	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/compress v1.17.11 // indirect
@@ -91,7 +91,6 @@ require (
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/onsi/ginkgo/v2 v2.21.0 // indirect
 	github.com/onsi/gomega v1.35.1 // indirect
-	github.com/opencontainers/runc v1.2.8 // indirect
 	github.com/opencontainers/selinux v1.13.0 // indirect
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c // indirect
 	github.com/pkg/errors v0.9.1 // indirect
@@ -100,6 +99,7 @@ require (
 	github.com/prometheus/client_model v0.6.1 // indirect
 	github.com/prometheus/common v0.60.0 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect
+	github.com/spf13/cobra v1.8.1 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
@@ -123,75 +123,76 @@ require (
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	k8s.io/apiextensions-apiserver v0.31.1 // indirect
-	k8s.io/apiserver v0.31.13 // indirect
-	k8s.io/cloud-provider v0.31.1 // indirect
-	k8s.io/component-base v0.31.13 // indirect
-	k8s.io/component-helpers v0.31.13 // indirect
-	k8s.io/kube-openapi v0.0.0-20241009091222-67ed5848f094 // indirect
+	k8s.io/apiextensions-apiserver v0.32.10 // indirect
+	k8s.io/apiserver v0.32.10 // indirect
+	k8s.io/cloud-provider v0.32.10 // indirect
+	k8s.io/component-base v0.32.10 // indirect
+	k8s.io/component-helpers v0.32.10 // indirect
+	k8s.io/controller-manager v0.32.10 // indirect
+	k8s.io/kube-openapi v0.0.0-20241105132330-32ad38e42d3f // indirect
 	sigs.k8s.io/cloud-provider-azure/pkg/azclient v0.0.55 // indirect
 	sigs.k8s.io/json v0.0.0-20241014173422-cfa47c3a1cc8 // indirect
-	sigs.k8s.io/structured-merge-diff/v4 v4.4.1 // indirect
+	sigs.k8s.io/structured-merge-diff/v4 v4.4.2 // indirect
 )
 
-replace k8s.io/api => k8s.io/api v0.31.13
+replace k8s.io/api => k8s.io/api v0.32.10
 
-replace k8s.io/apiextensions-apiserver => k8s.io/apiextensions-apiserver v0.31.13
+replace k8s.io/apiextensions-apiserver => k8s.io/apiextensions-apiserver v0.32.10
 
-replace k8s.io/apimachinery => k8s.io/apimachinery v0.31.13
+replace k8s.io/apimachinery => k8s.io/apimachinery v0.32.10
 
-replace k8s.io/apiserver => k8s.io/apiserver v0.31.13
+replace k8s.io/apiserver => k8s.io/apiserver v0.32.10
 
-replace k8s.io/cli-runtime => k8s.io/cli-runtime v0.31.13
+replace k8s.io/cli-runtime => k8s.io/cli-runtime v0.32.10
 
-replace k8s.io/client-go => k8s.io/client-go v0.31.13
+replace k8s.io/client-go => k8s.io/client-go v0.32.10
 
-replace k8s.io/cloud-provider => k8s.io/cloud-provider v0.31.13
+replace k8s.io/cloud-provider => k8s.io/cloud-provider v0.32.10
 
-replace k8s.io/cluster-bootstrap => k8s.io/cluster-bootstrap v0.31.13
+replace k8s.io/cluster-bootstrap => k8s.io/cluster-bootstrap v0.32.10
 
-replace k8s.io/code-generator => k8s.io/code-generator v0.31.13
+replace k8s.io/code-generator => k8s.io/code-generator v0.32.10
 
-replace k8s.io/component-base => k8s.io/component-base v0.31.13
+replace k8s.io/component-base => k8s.io/component-base v0.32.10
 
-replace k8s.io/component-helpers => k8s.io/component-helpers v0.31.13
+replace k8s.io/component-helpers => k8s.io/component-helpers v0.32.10
 
-replace k8s.io/controller-manager => k8s.io/controller-manager v0.31.13
+replace k8s.io/controller-manager => k8s.io/controller-manager v0.32.10
 
-replace k8s.io/cri-api => k8s.io/cri-api v0.31.13
+replace k8s.io/cri-api => k8s.io/cri-api v0.32.10
 
-replace k8s.io/csi-translation-lib => k8s.io/csi-translation-lib v0.31.13
+replace k8s.io/csi-translation-lib => k8s.io/csi-translation-lib v0.32.10
 
-replace k8s.io/dynamic-resource-allocation => k8s.io/dynamic-resource-allocation v0.31.13
+replace k8s.io/dynamic-resource-allocation => k8s.io/dynamic-resource-allocation v0.32.10
 
-replace k8s.io/kms => k8s.io/kms v0.31.13
+replace k8s.io/kms => k8s.io/kms v0.32.10
 
-replace k8s.io/kube-aggregator => k8s.io/kube-aggregator v0.31.13
+replace k8s.io/kube-aggregator => k8s.io/kube-aggregator v0.32.10
 
-replace k8s.io/kube-controller-manager => k8s.io/kube-controller-manager v0.31.13
+replace k8s.io/kube-controller-manager => k8s.io/kube-controller-manager v0.32.10
 
-replace k8s.io/kube-proxy => k8s.io/kube-proxy v0.31.13
+replace k8s.io/kube-proxy => k8s.io/kube-proxy v0.32.10
 
-replace k8s.io/kube-scheduler => k8s.io/kube-scheduler v0.31.13
+replace k8s.io/kube-scheduler => k8s.io/kube-scheduler v0.32.10
 
-replace k8s.io/kubectl => k8s.io/kubectl v0.31.13
+replace k8s.io/kubectl => k8s.io/kubectl v0.32.10
 
-replace k8s.io/kubelet => k8s.io/kubelet v0.31.13
+replace k8s.io/kubelet => k8s.io/kubelet v0.32.10
 
 replace k8s.io/legacy-cloud-providers => k8s.io/legacy-cloud-providers v0.30.4
 
-replace k8s.io/metrics => k8s.io/metrics v0.31.13
+replace k8s.io/metrics => k8s.io/metrics v0.32.10
 
-replace k8s.io/mount-utils => k8s.io/mount-utils v0.31.13
+replace k8s.io/mount-utils => k8s.io/mount-utils v0.32.10
 
-replace k8s.io/pod-security-admission => k8s.io/pod-security-admission v0.31.13
+replace k8s.io/pod-security-admission => k8s.io/pod-security-admission v0.32.10
 
-replace k8s.io/sample-apiserver => k8s.io/sample-apiserver v0.31.13
+replace k8s.io/sample-apiserver => k8s.io/sample-apiserver v0.32.10
 
-replace k8s.io/sample-cli-plugin => k8s.io/sample-cli-plugin v0.31.13
+replace k8s.io/sample-cli-plugin => k8s.io/sample-cli-plugin v0.32.10
 
-replace k8s.io/sample-controller => k8s.io/sample-controller v0.31.13
+replace k8s.io/sample-controller => k8s.io/sample-controller v0.32.10
 
-replace k8s.io/endpointslice => k8s.io/endpointslice v0.31.13
+replace k8s.io/endpointslice => k8s.io/endpointslice v0.32.10
 
-replace k8s.io/cri-client => k8s.io/cri-client v0.31.13
+replace k8s.io/cri-client => k8s.io/cri-client v0.32.10
