@@ -12,18 +12,19 @@ This driver allows Kubernetes to access Azure Lustre file system.
 
 &nbsp;
 
-### Container Images & Kubernetes Compatibility:
+### Container Images & Kubernetes Compatibility
 
 | Driver version  | Image                                                           | Supported k8s version | Lustre client version |
 |-----------------|-----------------------------------------------------------------|-----------------------|-----------------------|
-| main branch     | mcr.microsoft.com/oss/kubernetes-csi/azurelustre-csi:latest     | 1.21+                 | 2.15.5                |
-| v0.1.11         | mcr.microsoft.com/oss/kubernetes-csi/azurelustre-csi:v0.1.11    | 1.21+                 | 2.15.1                |
-| v0.1.14         | mcr.microsoft.com/oss/kubernetes-csi/azurelustre-csi:v0.1.14    | 1.21+                 | 2.15.3                |
-| v0.1.15         | mcr.microsoft.com/oss/kubernetes-csi/azurelustre-csi:v0.1.15    | 1.21+                 | 2.15.4                |
-| v0.1.17         | mcr.microsoft.com/oss/kubernetes-csi/azurelustre-csi:v0.1.17    | 1.21+                 | 2.15.5                |
-| v0.1.18         | mcr.microsoft.com/oss/kubernetes-csi/azurelustre-csi:v0.1.18    | 1.21+                 | 2.15.5                |
-| v0.2.0          | mcr.microsoft.com/oss/v2/kubernetes-csi/azurelustre-csi:v0.2.0  | 1.21+                 | 2.15.5                |
+| main branch     | mcr.microsoft.com/oss/kubernetes-csi/azurelustre-csi:latest     | 1.21+                 | 2.15.7                |
+| v0.3.1          | mcr.microsoft.com/oss/v2/kubernetes-csi/azurelustre-csi:v0.3.1  | 1.21+                 | 2.15.7                |
 | v0.3.0          | mcr.microsoft.com/oss/v2/kubernetes-csi/azurelustre-csi:v0.3.0  | 1.21+                 | 2.15.5                |
+| v0.2.0          | mcr.microsoft.com/oss/v2/kubernetes-csi/azurelustre-csi:v0.2.0  | 1.21+                 | 2.15.5                |
+| v0.1.18         | mcr.microsoft.com/oss/kubernetes-csi/azurelustre-csi:v0.1.18    | 1.21+                 | 2.15.5                |
+| v0.1.17         | mcr.microsoft.com/oss/kubernetes-csi/azurelustre-csi:v0.1.17    | 1.21+                 | 2.15.5                |
+| v0.1.15         | mcr.microsoft.com/oss/kubernetes-csi/azurelustre-csi:v0.1.15    | 1.21+                 | 2.15.4                |
+| v0.1.14         | mcr.microsoft.com/oss/kubernetes-csi/azurelustre-csi:v0.1.14    | 1.21+                 | 2.15.3                |
+| v0.1.11         | mcr.microsoft.com/oss/kubernetes-csi/azurelustre-csi:v0.1.11    | 1.21+                 | 2.15.1                |
 
 &nbsp;
 
@@ -31,7 +32,7 @@ This driver allows Kubernetes to access Azure Lustre file system.
 
 - [Install CSI driver in AKS cluster](./docs/install-csi-driver.md)
 - [Deploy workload with Static Provisioning](./docs/static-provisioning.md)
-- [Deploy workload with Dynamic Provisioning (Public Preview)](./docs/dynamic-provisioning.md)
+- [Deploy workload with Dynamic Provisioning](./docs/dynamic-provisioning.md)
 
 &nbsp;
 
