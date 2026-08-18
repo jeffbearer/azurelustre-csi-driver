@@ -87,6 +87,19 @@ For the full list of configurable values, version history, and advanced Helm usa
     ./deploy/install-driver.sh
     ```
 
+> [!NOTE]
+> Both `install-driver.sh` and `uninstall-driver.sh` install into `kube-system`
+> by default. To use a different namespace, set the `NAMESPACE` environment
+> variable (the script creates the namespace if it does not exist and rewrites
+> the manifests' namespace at apply time):
+>
+> ```shell
+> NAMESPACE=azurelustre-system ./deploy/install-driver.sh local
+> ```
+>
+> If you use workload identity, the federated credential subject must match the
+> namespace — see [workload-identity.md](./workload-identity.md).
+
 - Upgrade in place:
 
     **Stop every workload using Lustre on the affected nodes before upgrading.**
