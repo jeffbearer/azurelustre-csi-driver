@@ -125,6 +125,7 @@ spec:
               name: host-dev
             - mountPath: /etc/host-os-release
               name: host-os-release
+              readOnly: true
             - mountPath: /app/custom-entrypoint
               name: custom-entrypoint
               readOnly: true
@@ -268,10 +269,12 @@ spec:
               mountPropagation: Bidirectional
             - mountPath: /etc/kubernetes/
               name: azure-cred
+              readOnly: true
             - mountPath: /dev
               name: host-dev
             - mountPath: /etc/host-os-release
               name: host-os-release
+              readOnly: true
             - mountPath: /app/custom-entrypoint
               name: custom-entrypoint
               readOnly: true
