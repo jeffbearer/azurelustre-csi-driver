@@ -101,12 +101,12 @@ func TestPublishNodeFact(t *testing.T) {
 		},
 	}
 
-	err := driver.publishNodeFact(context.Background())
+	err := driver.publishNodeFact(t.Context())
 	require.NoError(t, err)
 
 	leaseName := nodeFactLeaseName(node.Name, string(node.UID))
 	lease, err := client.CoordinationV1().Leases(pod.Namespace).Get(
-		context.Background(), leaseName, metav1.GetOptions{})
+		t.Context(), leaseName, metav1.GetOptions{})
 	require.NoError(t, err)
 	require.NotNil(t, lease.Spec.RenewTime)
 	assert.WithinDuration(t, time.Now(), lease.Spec.RenewTime.Time, time.Second)
@@ -152,12 +152,12 @@ func TestPublishNodeFactRequiresReporterPod(t *testing.T) {
 		podNamespace: "kube-system",
 	}
 
-	err := driver.publishNodeFact(context.Background())
+	err := driver.publishNodeFact(t.Context())
 
 	require.Error(t, err)
 	assert.Contains(t, err.Error(), "get reporter pod")
 	leases, listErr := driver.kubeClient.CoordinationV1().Leases("kube-system").List(
-		context.Background(), metav1.ListOptions{})
+		t.Context(), metav1.ListOptions{})
 	require.NoError(t, listErr)
 	assert.Empty(t, leases.Items)
 }
@@ -185,7 +185,7 @@ func TestPublishNodeFactReplacesPreviousEvidence(t *testing.T) {
 		},
 		Spec: coordinationv1.LeaseSpec{
 			RenewTime:      &metav1.MicroTime{Time: time.Now().Add(-time.Hour)},
-			HolderIdentity: ptr("previous-pod"),
+			HolderIdentity: new("previous-pod"),
 		},
 	}
 	pod.Status.InitContainerStatuses = nil
