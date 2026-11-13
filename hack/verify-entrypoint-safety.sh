@@ -94,4 +94,46 @@ assert_equal "1" "${result}" "retry_install should report exhausted attempts"
 assert_equal "3" "${install_attempts}" "retry_install attempt count"
 assert_equal "2" "${eviction_attempts}" "eviction should run only before a retry"
 
-echo "Entrypoint package-eviction safety checks passed."
+function run_teardown_restart_scenario() (
+  local health_result="$1"
+  local worker_result="$2"
+  local expected_result="$3"
+  local expected_calls="$4"
+  local calls=""
+
+  function node_teardown_requested() {
+    return 0
+  }
+  function node_teardown_command() {
+    if [[ "$1" == "--experimental-node-teardown-health" ]]; then
+      calls+=" health"
+      return "${health_result}"
+    fi
+    [[ "$1" == "--experimental-node-teardown-worker" ]] || fail "unexpected teardown command"
+    calls+=" worker"
+    return "${worker_result}"
+  }
+  function install_lustre_client() {
+    calls+=" install:$1"
+  }
+  function load_lnet() {
+    fail "loader restart must not load modules after a teardown request"
+  }
+  function reconcile_lnet() {
+    fail "drained loader must not reconcile LNet"
+  }
+  function wait_for_node_retirement() {
+    calls+=" idle:$1"
+  }
+
+  local result=0
+  run_loader >/dev/null 2>&1 || result=$?
+  assert_equal "${expected_result}" "${result}" "loader restart result"
+  assert_equal "${expected_calls}" "${calls}" "loader restart lifecycle"
+)
+
+run_teardown_restart_scenario 0 0 0 " health install:utils worker idle:0"
+run_teardown_restart_scenario 0 1 0 " health install:utils worker idle:1"
+run_teardown_restart_scenario 1 0 1 " health"
+
+echo "Entrypoint package-eviction and completion-teardown safety checks passed."
