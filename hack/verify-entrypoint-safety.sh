@@ -183,6 +183,9 @@ function run_loader_termination_scenario() (
   function update_ca_trust() {
     :
   }
+  function node_teardown_requested() {
+    return 1
+  }
   function install_lustre_client() {
     calls+=" install:$1"
     signal_at install
@@ -227,6 +230,7 @@ function run_loader_termination_scenario() (
   trap 'assert_termination' EXIT
   local AZURELUSTRE_CSI_ROLE="loader"
   AZURELUSTRE_CSI_LNET_RECONCILE_INTERVAL=0
+  AZURELUSTRE_TEARDOWN_DIR=""
   main >/dev/null
   fail "loader continued after ${signal} during ${phase}"
 )
@@ -239,6 +243,48 @@ done
 run_loader_termination_scenario TERM install busy " install:full"
 run_loader_termination_scenario TERM load idle " install:full load"
 run_loader_termination_scenario TERM reconcile busy " install:full load check reconcile"
+
+function run_teardown_restart_scenario() (
+  local health_result="$1"
+  local worker_result="$2"
+  local expected_result="$3"
+  local expected_calls="$4"
+  local calls=""
+
+  function node_teardown_requested() {
+    return 0
+  }
+  function node_teardown_command() {
+    if [[ "$1" == "--experimental-node-teardown-health" ]]; then
+      calls+=" health"
+      return "${health_result}"
+    fi
+    [[ "$1" == "--experimental-node-teardown-worker" ]] || fail "unexpected teardown command"
+    calls+=" worker"
+    return "${worker_result}"
+  }
+  function install_lustre_client() {
+    calls+=" install:$1"
+  }
+  function load_lnet() {
+    fail "loader restart must not load modules after a teardown request"
+  }
+  function reconcile_lnet() {
+    fail "drained loader must not reconcile LNet"
+  }
+  function wait_for_node_retirement() {
+    calls+=" idle:$1"
+  }
+
+  local result=0
+  run_loader >/dev/null 2>&1 || result=$?
+  assert_equal "${expected_result}" "${result}" "loader restart result"
+  assert_equal "${expected_calls}" "${calls}" "loader restart lifecycle"
+)
+
+run_teardown_restart_scenario 0 0 0 " health install:utils worker idle:0"
+run_teardown_restart_scenario 0 1 0 " health install:utils worker idle:1"
+run_teardown_restart_scenario 1 0 1 " health"
 
 mkdir -p "${PKG_ROOT}/_output"
 startup_fixture=$(mktemp -d "${PKG_ROOT}/_output/startup-safety.XXXXXX")
@@ -368,10 +414,10 @@ bash -c '
   function install_lustre_client() { return 42; }
   export AZURELUSTRE_NODE_STARTUP_DIR="$2" AZURELUSTRE_CSI_ROLE=loader
   export POD_UID=11111111-2222-4333-8444-555555555555
-  export LUSTRE_VERSION=2.17.0 CLIENT_SHA_SUFFIX=24-gf517bc4
+  export LUSTRE_VERSION=2.17.0 CLIENT_SHA_SUFFIX=24-gf517bc4 AZURELUSTRE_TEARDOWN_DIR=""
   main
 ' bash "${PKG_ROOT}" "${startup_fixture}" >/dev/null 2>&1 || result=$?
 assert_equal 42 "${result}" "loader package failure must still trigger a Kubernetes restart"
 [[ ! -e "${startup_fixture}/loader-ready" ]] || fail "failed loader left a ready marker"
 
-echo "Entrypoint package, termination and cleanup-startup safety checks passed."
+echo "Entrypoint package, termination, cleanup-startup and completion-teardown safety checks passed."

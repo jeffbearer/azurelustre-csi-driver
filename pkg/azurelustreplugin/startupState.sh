@@ -62,6 +62,12 @@ function driver_startup_ready() {
 }
 
 function loader_startup_live() {
+  # A retirement request intentionally leaves modules absent and the loader
+  # drained. Keep its existing identity-checked health path.
+  if [[ -n "${AZURELUSTRE_TEARDOWN_DIR:-}" && -e "${AZURELUSTRE_TEARDOWN_DIR}/request" ]]; then
+    /app/azurelustreplugin --experimental-node-teardown-dir="${AZURELUSTRE_TEARDOWN_DIR}" --experimental-node-teardown-health
+    return
+  fi
   if loader_startup_ready; then
     [[ -d /sys/module/lnet ]]
     return

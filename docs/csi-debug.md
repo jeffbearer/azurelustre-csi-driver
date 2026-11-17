@@ -285,7 +285,11 @@ using the resident module. A new pod image, successful package installation, or
 zero module reference count does not prove that the desired client is active.
 Only explicitly qualified driver/tools/module combinations should be used.
 
-Package-install recovery also preserves resident Lustre/LNet modules and their packages, even
+Routine termination is separate from the opt-in experimental completion-gated
+retirement worker. That worker still requires a valid request, unloads without
+force, and verifies module absence before acknowledging completion. Ordinary
+termination does not request or acknowledge retirement. Ordinary package-install
+recovery also preserves resident Lustre/LNet modules and their packages, even
 when idle or different from the requested client. It removes conflicting
 packages only when no Lustre/LNet modules remain. An incompatible resident
 client or unresolved package conflict may require the approved node lifecycle
